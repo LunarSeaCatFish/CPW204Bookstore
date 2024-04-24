@@ -2,6 +2,9 @@
 This repository is a class example used to gain
 experience with source control and TypeScript.
 
+## Live website
+Check out the live website hosted by [GitHub Pages](https://lunarseacatfish.github.io/CPW204Bookstore/)
+
 ## Getting Started
 
 ### Installing TypeScript
