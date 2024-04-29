@@ -59,6 +59,8 @@ function processBook() {
  * @returns 
  */
 function getBook():Book {
+    clearAllErrorMessages();
+
     // Get all inputs
     let isbnTextBox = document.querySelector("#isbn") as HTMLInputElement;
     let titleTextBox = document.querySelector("#title") as HTMLInputElement;
@@ -117,4 +119,18 @@ function isValidIsbn(data:string) {
  */
 function addBook(b:Book):void {
 
+}
+
+/**
+ * Clears all the validation error message spans
+ * in the form
+ */
+function clearAllErrorMessages() {
+    // Get all error spans
+    let allSpans = document.querySelectorAll("span.error-msg");
+
+    // Loop through, and set each span to an empty string
+    allSpans.forEach(span => span.textContent = ""); 
+    // This is a shorter way to do a for loop. 
+    // It sets each of the spans to an empty string
 }
