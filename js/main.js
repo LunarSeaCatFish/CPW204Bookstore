@@ -44,8 +44,13 @@ function getBook() {
         let addedBook = new Book();
         addedBook.isbn = isbn;
         addedBook.price = price;
-        addedBook.releaseDate = new Date(releaseDate);
         addedBook.title = title;
+        const dateParts = releaseDate.split("-");
+        const year = parseInt(dateParts[0]);
+        const month = parseInt(dateParts[1]) - 1;
+        const day = parseInt(dateParts[2]);
+        const correctDate = new Date(year, month, day);
+        addedBook.releaseDate = correctDate;
         return addedBook;
     }
     return null;
