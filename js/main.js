@@ -7,7 +7,8 @@ window.onload = function () {
 function processBook() {
     let userBook = getBook();
     if (userBook != null) {
-        addBook(userBook);
+        addBookToWebpage(userBook);
+        addBookToStorage(userBook);
     }
 }
 function getBook() {
@@ -58,7 +59,7 @@ function isValidIsbn(data) {
     let regex = /^\d{13}$/;
     return regex.test(data);
 }
-function addBook(b) {
+function addBookToWebpage(b) {
     console.log(b);
     let bookDiv = document.createElement("div");
     let titleHeading = document.createElement("h2");
@@ -74,6 +75,22 @@ function addBook(b) {
     bookDiv.appendChild(bookDescription);
     let bookListDisplay = document.querySelector("#book-display");
     bookListDisplay.appendChild(bookDiv);
+}
+function addBookToStorage(b) {
+    const bookStorageKey = "Books";
+    let bookData = localStorage.getItem(bookStorageKey);
+    if (bookData == null) {
+        let books = [b];
+        books.push(b);
+        bookData = JSON.stringify(books);
+        localStorage.setItem("Books", bookData);
+    }
+    else {
+        let books = JSON.parse(bookData);
+        books.push(b);
+        let booksString = JSON.stringify(books);
+        localStorage.setItem(bookStorageKey, booksString);
+    }
 }
 function clearAllErrorMessages() {
     let allSpans = document.querySelectorAll("span.error-msg");

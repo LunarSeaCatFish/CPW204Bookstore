@@ -37,7 +37,8 @@ function processBook() {
 
     let userBook = getBook();
     if (userBook != null) {
-        addBook(userBook);
+        addBookToWebpage(userBook);
+        addBookToStorage(userBook);
     }
 }
 
@@ -128,11 +129,11 @@ function isValidIsbn(data:string) {
 }
 
 /**
- * Adds a Book object to web page and to web storage. Assumes
+ * Adds a Book object to web page. Assumes
  * all data is valid
  * @param b The Book containing valid data to be added
  */
-function addBook(b:Book):void {
+function addBookToWebpage(b:Book):void {
     console.log(b);
 
     // Add the book to the web page
@@ -155,6 +156,34 @@ function addBook(b:Book):void {
     //Add bookDiv to web page
     let bookListDisplay = document.querySelector("#book-display");
     bookListDisplay.appendChild(bookDiv); // Add the newly created book
+}
+
+/**
+ * Adds a single Book object to existing Book list in storage.
+ * If no books are currently stored, a new list will be created and stored.
+ * @param b The Book object to be added to storage
+ */
+function addBookToStorage(b:Book):void {
+    const bookStorageKey = "Books";
+    // Read existing books out of storage
+    let bookData = localStorage.getItem(bookStorageKey);
+
+    // If bookData is null, the "Books" key does not exist in storage
+    if (bookData == null) {
+        // Create a new list and add our current book
+        let books:Book[] = [b];
+        books.push(b);  // Add the new book to the array
+
+        // Add to localStorage
+        bookData = JSON.stringify(books);
+        localStorage.setItem("Books", bookData);
+    } else {
+        // Convert the JSON string from storage into a Book array
+        let books:Book[] = JSON.parse(bookData);
+        books.push(b); // Add the new book to the array
+        let booksString = JSON.stringify(books);
+        localStorage.setItem(bookStorageKey, booksString);
+    }
 }
 
 /**
