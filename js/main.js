@@ -79,18 +79,10 @@ function addBookToWebpage(b) {
 function addBookToStorage(b) {
     const bookStorageKey = "Books";
     let bookData = localStorage.getItem(bookStorageKey);
-    if (bookData == null) {
-        let books = [b];
-        books.push(b);
-        bookData = JSON.stringify(books);
-        localStorage.setItem("Books", bookData);
-    }
-    else {
-        let books = JSON.parse(bookData);
-        books.push(b);
-        bookData = JSON.stringify(books);
-        localStorage.setItem(bookStorageKey, bookData);
-    }
+    let books = bookData ? JSON.parse(bookData) : [];
+    books.push(b);
+    bookData = JSON.stringify(books);
+    localStorage.setItem(bookStorageKey, bookData);
 }
 function clearAllErrorMessages() {
     let allSpans = document.querySelectorAll("span.error-msg");
