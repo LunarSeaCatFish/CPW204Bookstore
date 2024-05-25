@@ -88,8 +88,8 @@ function addBookToStorage(b) {
     else {
         let books = JSON.parse(bookData);
         books.push(b);
-        let booksString = JSON.stringify(books);
-        localStorage.setItem(bookStorageKey, booksString);
+        bookData = JSON.stringify(books);
+        localStorage.setItem(bookStorageKey, bookData);
     }
 }
 function clearAllErrorMessages() {
