@@ -5,7 +5,6 @@ window.onload = function () {
     addBookBtn.onclick = processBook;
 };
 function processBook() {
-    console.log("processBook was called");
     let userBook = getBook();
     if (userBook != null) {
         addBook(userBook);

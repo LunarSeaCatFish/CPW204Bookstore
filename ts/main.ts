@@ -34,7 +34,6 @@ window.onload = function () {
 }
 
 function processBook() {
-    console.log("processBook was called");
 
     let userBook = getBook();
     if (userBook != null) {
